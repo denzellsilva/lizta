@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <style>
+            body {
+                background-image: url("{{ url_for('static', filename='assets/rename.jpg') }}");
+                background-repeat: no-repeat;
+                background-size: cover;
+                font-family: Verdana;
+                min-height: 100vh;
+                font-size: 1.3rem;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .form {
+                width: 250px;
+                min-height: 380px;
+                background: rgba(0,0,0,0.6);
+                border-radius: 10px;
+                padding: 25px;
+            }
+    
+            .form h2 {
+                width: 220px;
+                font-family: sans-serif;
+                text-align: center;
+                color: rgb(244, 238, 238);
+                font-size: 50px;
+                background-color: transparent;
+                border-radius: 10px;
+                margin: 2px;
+                padding: 8px;
+            }
+
+            .form input {
+                width: 240px;
+                height: 35px;
+                background: transparent;
+                border-bottom: 1px solid firebrick;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                color: white;
+                font-size: 20px;
+                letter-spacing: 1px;
+                margin-top: 30px;
+                font-family: sans-serif;
+            }
+
+            .form input:focus {
+                outline: none;
+            }
+
+            ::placeholder{
+                color: white;
+                font-family: Arial;
+            }
+
+            .btnn{
+                width: 240px;
+                height: 40px;
+                background: firebrick;
+                border: none;
+                margin-top: 30px;
+                font-size: 18px;
+                border-radius: 10px;
+                cursor: pointer;
+                color: white;
+                transition: 0.3s ease;
+            }
+
+            .btnn:hover {
+                background: darkred;
+            }
+
+            .link {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 17px;
+                text-align: center;
+                color: white;
+            }
+
+            a {
+                color: firebrick;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            a:focus {
+                text-decoration: none;
+            }
+
+            a:active {
+                color: white;
+                background-color: firebrick;
+            }
+
+            p.error {
+                font-size: 0.7em;
+                background-color: rgb(178, 34, 34, 0.6);
+                text-align: center;
+                margin: 0;
+                color: white;
+                padding: 1em;
+                border-radius: 0.7em;
+
+                
+            }
+
+            ::-ms-reveal {
+                filter: invert(100%);
+            }
+        </style>
+    </head>
+    <body class="login">
+        <main>
+            <form action="{{ url_for('login') }}" method="POST" autocomplete="off">
+                <div class="form">
+                    <h2>Lizta</h2>
+                    {% if errors %}
+                        <p class="error">{{ errors['login_error'] }}</p>
+                    {% endif %}
+                    <input type="text" id="username" name="username" required placeholder="Enter Username">
+                    <input type="password" id="password" name="password" required placeholder="Enter Password">
+                    <button type="submit" class="btnn">Login</button>
+                    <p class="link">
+                        Don't have an account?<br><a href="{{ url_for('signup') }}">Sign up</a>
+                    </p>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

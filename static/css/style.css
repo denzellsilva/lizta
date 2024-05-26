@@ -1,0 +1,419 @@
+:root {
+    --main-bg-color: rgb(34, 34, 33);
+    --main-border-color: rgb(170 94 94);
+    --main-link-color: rgb(147 147 146);
+    --main-link-color-hover: rgb(255, 255, 255);
+    --main-link-transition: 0.2s;
+    --main-box-shadow: 0 0 1em var(--main-border-color);
+    --cancel-btn-bg-color:rgb(155 5 224);
+    --cancel-btn-bg-hover: rgb(113 15 158);
+    --submit-btn-bg-color:firebrick;
+    --submit-btn-bg-hover: darkred;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 255, 255);
+    
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-bg-color);
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* || NAVIGATION STYLES*/
+.navigation {
+    /* border: 2px solid rgb(0, 0, 0); */
+    position: fixed;
+    top: 0;
+    background-color: rgb(34, 33, 33);
+    width: 1200px;
+    border-bottom: 2px solid var(--main-border-color);
+    padding: 0 1rem;
+}
+
+.navigation nav {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.navigation ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 1em;
+    gap: 1em;
+}
+
+.navigation li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.navigation a {
+    padding: 0.7rem;
+    display: block;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    transition: 0.4s;
+}
+
+.navigation li a {   
+    border-radius: 0.5rem;
+    background-color: var(--cancel-btn-bg-color);
+}
+
+.navigation li a:hover,.navigation li a.active{
+    background-color: var(--cancel-btn-bg-hover);
+}
+
+a.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    text-transform: capitalize;
+}
+
+/* || MAIN STYLES*/
+main {
+    padding: 20px 4rem;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-top: 6rem;
+}
+
+/* || LIST CONTAINER STYLES*/
+
+.lists-container {
+    border: 1px solid var(--main-border-color);
+    border-radius: 1rem;
+    padding: 0.5rem 4rem 2rem;
+    /* padding-bottom: 2rem; */
+    box-shadow: 0 0 1em var(--main-border-color);
+}
+
+
+/* || LIST CONTAINER TYPOGRAPHY STYLES*/
+.lists-container a {
+    color: white;
+    text-decoration: none;
+}
+
+.lists-container h1 {
+    margin: 0;
+}
+
+/* || LIST CONTAINER HEADER STYLES*/
+.lists-container header{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--main-border-color);
+    position: sticky;
+    top: 3.81rem;
+    background-color: var(--main-bg-color);
+}
+
+.lists-container header * {
+    padding: 0.8rem;
+}
+
+.lists-container header a {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 300;
+    outline-color: transparent;
+    transition: 0.3s;
+    color: rgb(147 147 146);
+    /* padding: 0 0.5rem; */
+}
+
+.lists-container header a:hover {
+    color: white;
+}
+
+/* || LISTS WRAPPER STYLES*/
+.lists-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* || LIST BOX STYLES*/
+.list-box {
+    border: 1px solid var(--main-border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: var(--main-link-transition);
+}
+
+.list-box h2 {
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.list-box ul {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+}
+
+.list-box li.empty {
+    list-style-type: none;
+    color: var(--main-link-color);
+}
+
+
+.list-link:hover .list-box {
+    background-color: rgb(54 54 51);
+}
+
+/* || LIST FORM STYLES */
+
+.task-container {
+    display: flex;
+    align-items: start;
+}
+
+.bullet {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+textarea {
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: hidden;
+    border: 1px solid var(--main-border-color);
+}
+
+.cancel-button {
+    border: none;
+    background: transparent;
+    color: var(--main-link-color);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    vertical-align: top;
+    transition: var(--main-link-transition);
+}
+
+.cancel-button:hover {
+    color: var(--main-link-color-hover);
+}
+
+.bullet, .cancel-button {
+    position: relative;
+    top: 5px;
+    left: 0;
+}
+
+.error-message {
+    color: rgb(255, 77, 77);
+    background: url("../assets/error.svg");
+    padding-left: 19px;
+    background-repeat: no-repeat;
+    background-position-y: 1px;
+    margin-bottom: 1em;
+}
+
+.form {
+    width: 36em;
+    border: 1px solid var(--main-border-color);
+    box-shadow: var(--main-box-shadow);
+    border-radius: 10px;
+    padding: 25px;
+    margin: auto;
+
+}
+
+.form h2 {
+    font-family: sans-serif;
+    text-align: center;
+    color: rgb(244, 238, 238);
+    font-size: 50px;
+    background-color: transparent;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 8px;
+}
+
+.form .list_name, .form textarea {
+    width: 100%;
+    min-height: 27px;
+    background: transparent;
+    border-bottom: 1px solid var(--main-border-color);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    margin-bottom: 1em;
+}
+
+.form textarea {
+    border-bottom: none;
+    vertical-align: text-top;
+}
+
+.form input:focus, .form textarea:focus {
+    outline: none;
+}
+
+::placeholder{
+    color: rgb(156, 156, 150);
+    font-family: Arial;
+}
+
+.btnn{
+    width: 100%;
+    height: 40px;
+    background: firebrick;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.btnn:hover {
+    background: darkred;
+}
+
+.link {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    text-align: center;
+    color: white;
+}
+
+.add-btn {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 300;
+    outline-color: transparent;
+    transition: 0.3s;
+    color: var(--main-link-color);
+    margin: 0 1rem 1rem;
+    background-color: rgb(34, 34, 33);
+    border: none;
+    position: relative;
+}
+
+.add-btn:hover {
+    color: var(--main-link-color-hover);
+    cursor: pointer;
+}
+
+.add-btn-text {
+    font-size: 20px; 
+    position:absolute;
+    left: 31px;
+    top:7px;
+    width: max-content;
+}
+
+button.cancel {
+    background-color: var(--cancel-btn-bg-color);
+    margin-bottom: 0;
+}
+
+button.cancel:hover {
+    background-color: var(--cancel-btn-bg-hover);
+}
+
+/* || SHOWLIST */
+
+.show-list-box h1 {
+    margin:0; 
+    font-weight: normal;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.btn-update {
+    /* font-size: 26px; */
+    color: var(--main-link-color);
+    background-color: var(--main-bg-color);
+    border: none;
+    /* transform: scale(-1, 1); */
+    padding: 0 0.5rem;
+    position: relative;
+    top: -2px;
+    transition: var(--main-link-transition);
+}
+
+.btn-update:hover {
+    cursor: pointer;
+    color: var(--main-link-color-hover);
+}
+
+.delete-list {
+    position: relative;
+    top: -2px;
+}
+
+.name-btns {
+    display: flex;
+    align-self: center;
+}
+
+.edit-buttons {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.save-btn {
+    color: var(--main-link-color-hover);
+    background-color: var(--submit-btn-bg-color);
+    border: 0;
+    border-radius: 3px;
+}
+
+.save-btn:hover {
+    background-color: var(--submit-btn-bg-hover);
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: var(--main-link-color-hover);
+    background-color: var(--cancel-btn-bg-color);
+    border: 0;
+    border-radius: 3px;
+}
+
+.cancel-btn:hover {
+    background-color: var(--cancel-btn-bg-hover);
+    cursor: pointer;
+}
+
+.form li {
+    font-size: 21px;
+    margin-bottom: 1em;
+}

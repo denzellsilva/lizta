@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+                background-image: url("{{ url_for('static', filename='assets/rename.jpg') }}");
+                background-repeat: no-repeat;
+                background-size: cover;
+                font-family: Verdana;
+                min-height: 100vh;
+                font-size: 1.3rem;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .form {
+                width: 16em;
+                min-height: 380px;
+                background: rgba(0,0,0,0.6);
+                border-radius: 10px;
+                padding: 25px;
+
+            }
+    
+            .form h2 {
+                font-family: sans-serif;
+                text-align: center;
+                color: rgb(244, 238, 238);
+                font-size: 50px;
+                background-color: transparent;
+                border-radius: 10px;
+                margin: 2px;
+                padding: 8px;
+            }
+
+            .form input {
+                width: 100%;
+                height: 35px;
+                background: transparent;
+                border-bottom: 1px solid firebrick;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                color: white;
+                font-size: 20px;
+                letter-spacing: 1px;
+                margin-top: 30px;
+                font-family: sans-serif;
+            }
+
+            .form input:focus {
+                outline: none;
+            }
+
+            ::placeholder{
+                color: white;
+                font-family: Arial;
+            }
+
+            .btnn{
+                width: 100%;
+                height: 40px;
+                background: firebrick;
+                border: none;
+                margin-top: 30px;
+                font-size: 18px;
+                border-radius: 10px;
+                cursor: pointer;
+                color: white;
+                transition: 0.3s ease;
+            }
+
+            .btnn:hover {
+                background: darkred;
+            }
+
+            .link {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 17px;
+                text-align: center;
+                color: white;
+            }
+
+            a {
+                color: firebrick;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            a:focus {
+                text-decoration: none;
+            }
+
+            a:active {
+                color: white;
+                background-color: firebrick;
+            }
+
+            p.error {
+                font-size: 0.7em;
+                margin: 1rem 0 0;
+                color: rgb(255, 77, 77);
+                background: url("{{ url_for('static', filename='assets/error.svg') }}");
+                padding-left: 19px;
+                background-repeat: no-repeat;
+                background-position-y: 1.5px;
+            }
+
+            p.success {
+                font-size: 0.7em;
+                background-color: rgb(175, 0, 255, 0.86);
+                text-align: center;
+                margin: 0;
+                color: white;
+                padding: 1em;
+                border-radius: 0.7em;
+            }
+
+            input[name="password"]::-ms-reveal {
+                filter: invert(100%);
+            }
+
+            input[name="confirm_password"]::-ms-reveal {
+                display: none;
+            }
+    </style>
+</head>
+<body class="login">
+    <form action="{{ url_for('signup') }}" method="POST" autocomplete="off">
+        <div class="form">
+            <h2>Lizta</h2>
+            {% if success %}
+                <p class="success">{{ success }}</p>
+            {% endif %}
+            {# <p class="success">Hello</p> #}
+            <input type="text" id="username" name="username" required placeholder="Enter Username">
+            {% if errors and errors['username_taken'] %}
+                <p class="error">{{ errors['username_taken'] }}</p>
+            {% endif %}
+            <input type="password" id="password" name="password" required placeholder="Enter Password">
+            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Retype Password">
+            {% if errors and errors['password_match'] %}
+                <p class="error">{{ errors['password_match'] }}</p>
+            {% endif %}
+            <button type="submit" class="btnn">Sign Up</button>
+            <p class="link">
+                Already have an account?<br><a href="{{ url_for('index') }}">Login here</a>.
+            </p>
+        </div>
+    </form>
+</body>
+</html>

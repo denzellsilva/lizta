@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add More Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="content">
+        <header class="navigation">
+            <nav>
+                <a href="{{ url_for('dashboard') }}" class="logo">Lizta</a>
+                <ul>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {# <h1>Add More Task to "{{ list_name }}"</h1> #}
+            <form action="{{ url_for('add_task', list_id=list_id) }}" method="POST">
+                <div class="form">
+                    <textarea class="list_name" name="list_name" required oninput="adjustInputSize(this)" rows="1" placeholder="Title" disabled>{{ list_name }}</textarea>
+                    <div id="tasks_container">
+                        <!-- Existing tasks will be displayed here -->
+                        {% for task in tasks %}
+                        <li>{{ task[2] }}</li>
+                        {% endfor %}
+                        <div class="task-container" id="task_1">
+                            <span class="bullet">&#8226;</span>
+                            <textarea class="task-input" name="tasks[]" required oninput="adjustInputSize(this)" rows="1" style="padding-left: 12px;" autofocus></textarea>
+                            <button type="button" class="cancel-button" onclick="cancelTask('task_1')">&#10005;</button>
+                        </div>
+                    </div>
+                    <div id="error_message" class="error-message" style="display: none;">To do list must have at least one task</div>
+                    <button type="button" onclick="addTask()" class="add-btn">+ <span class="add-btn-text">More Task</span></button>
+                    {# <button type="button" onclick="/*addTask()*/">Add Task</button> #}
+                    <button type="submit" class="btnn">Add</button>
+                    <a href="{{ url_for('show_list', list_id=list_id) }}"><button type="button" class="btnn cancel">Cancel</button></a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        function addTask() {
+            const container = document.getElementById('tasks_container');
+            const div = document.createElement('div');
+            const taskId = 'task_' + (container.childElementCount + 1);
+            div.className = "task-container";
+            div.id = taskId;
+            let buttonHtml = '';
+            //if (container.childElementCount > 0) {
+                buttonHtml = `<button type="button" class="cancel-button" onclick="cancelTask('${taskId}')">&#10005;</button>`;
+            //}
+            div.innerHTML = `
+                <span class="bullet">&#8226;</span>
+                <textarea class="task-input" name="tasks[]" required oninput="adjustInputSize(this)" rows="1" style="padding-left: 12px;"></textarea>
+                ${buttonHtml}
+            `;
+            container.appendChild(div);
+            const textarea = div.querySelector('textarea');
+            adjustInputSize(textarea);
+            textarea.focus();
+        }
+
+        function adjustInputSize(textarea) {
+            textarea.style.height = 'auto'; 
+            textarea.style.height = textarea.scrollHeight + 'px'; 
+        }
+
+        function cancelTask(taskId) {
+            const container = document.getElementById('tasks_container');
+            if (container.childElementCount === 1) {
+                document.getElementById('error_message').style.display = 'block';
+                return;
+            }
+            document.getElementById(taskId).remove();
+        }
+    </script>
+</body>
+</html>

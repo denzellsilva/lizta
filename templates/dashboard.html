@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="content">
+        <header class="navigation">
+            <nav>
+                <a href="{{ url_for('dashboard') }}" class="logo">Lizta</a>
+                <ul>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="lists-container">
+                <header>
+                    <h1>Your Lists:</h1>
+                    <a href="{{ url_for('create_list') }}" title="Create a new list">+</a>
+                </header>
+                {% if data | length == 0 %}
+                    {# <a href="{{ url_for('create_list') }}" class="create-link">Create a List</a> #}
+                {% else %}
+                <section class="lists-wrapper">
+                    {% for item in data %}
+                        <a href="{{ url_for('show_list', list_id=item['list_id']) }}" class="list-link">
+                            <div class="list-box">
+                                {% if  item['list_name'] | length < 20%}
+                                <h2>{{ item['list_name'] }}</h2>
+                                
+                                {% else %}
+                                <h2>{% for i in range(0, 20)%}{{item['list_name'][i]}}{% endfor %}...</h2>
+                                {% endif %}
+                               
+                                <ul>
+                                    {% if  item['tasks'] == [] %}
+                                        <li class="empty">No tasks added...</li>
+                                    {% else %}
+                                        <li>
+                                            {% for i in range(0, 10)%}{{item['tasks'][0][2][i]}}{% endfor %}...
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </section>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>
